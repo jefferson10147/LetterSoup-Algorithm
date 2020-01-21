@@ -82,6 +82,7 @@ class LetterSoup{
        while (i<words.length)
        {
             word = words[i];
+            i++;
             do
             {
                 rand = r.nextInt(8); 
@@ -109,7 +110,6 @@ class LetterSoup{
                     break;
                 }
             }while(flag);
-            i++;
             this.cleanVector(vAux);
        } 
     }
