@@ -6,7 +6,8 @@ can be writen in  at least one state, this can be solved simple as counting the 
 an comparing if this number is <= that NxN */
 
 import java.util.Random;
-class LetterSoup{
+class LetterSoup
+{
     private char [][] matriz;
     private char [][] matrizAux;  
     private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; //words to write inside the matriz
@@ -54,7 +55,8 @@ class LetterSoup{
         int x;
         for(int i = 0; i<this.size; i++)
             for (int j = 0; j<this.size; j++)
-                if(matrizR[i][j] == '0'){
+                if(matrizR[i][j] == '0')
+                {
                     x = r.nextInt(26);
                     matrizR [i][j] = getABC(x); 
                 }
@@ -104,7 +106,8 @@ class LetterSoup{
                     if(vAux[z] == '1')
                         x++;
 
-                if (x == 8){
+                if (x == 8)
+                {
                     cleanMatriz(this.matriz);
                     i=0;
                     break;
@@ -132,7 +135,8 @@ class LetterSoup{
 
                     this.cont2++;
                 }
-                if(this.cont == word.length()){
+                if(this.cont == word.length())
+                {
                     
                     for(int i = 0; i<word.length(); i++)
                     {
@@ -166,7 +170,8 @@ class LetterSoup{
                     this.cont2++;
                     x--;
                 }
-                if(this.cont == word.length()){
+                if(this.cont == word.length())
+                {
                     for(int i = 0; i<word.length(); i++)
                     {
                         this.matriz[this.row][this.col] = word.charAt(i);
@@ -198,7 +203,8 @@ class LetterSoup{
 
                     this.cont2++;
                 }
-                if (this.cont  == word.length()){
+                if (this.cont  == word.length())
+                {
                     for(int i = 0; i<word.length(); i++)
                     {
                         this.matriz[this.row][this.col] = word.charAt(i);
@@ -224,14 +230,15 @@ class LetterSoup{
             if((this.row + 1) - word.length() >= 0)
             {
                 this.cont = 0; this.cont2 = 0;
-                for (int i = this.row; i >= (this.row + 1) - word.length(); i--) //;<=;
+                for (int i = this.row; i >= (this.row + 1) - word.length(); i--) 
                 {
                     if (this.matriz[i][this.col] == '0' || this.matriz[i][this.col] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
                 }
-                if (cont  == word.length()){
+                if (cont  == word.length())
+                {
                     for(int i = 0; i<word.length(); i++)
                     {
                         this.matriz[this.row][this.col] = word.charAt(i);
