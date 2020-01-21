@@ -61,8 +61,8 @@ class LetterSoup{
                 }
     }
 
-    public int getOnMatrizAux (int r, int c) //filling in with '1' the position on the matriz that the word can't be on
-    {                                        //and returning the numbers of the position that contain '1'
+    public int getOnMatrizAux (int r, int c) //filling in with '1' the position on the matriz that the word can't be on it
+    {                                        //and returning the number of the positions that contains '1'
         int counting1 = 0;
         this.matrizAux [r][c] = '1';
         
