@@ -1,7 +1,7 @@
 /* To be considered: the complexity of this algorithm is based on the numers of words you like
-to write inside the matriz, and how big matriz is, this means if you want to write a big numbers of words 
-inside a small matriz, the algorithm will take some time to find the correct state where the whole words 
-are inside matriz. And you have to be SURE that the words you like to write inside the matriz
+to write inside the matriz, and how big matriz is, this means if you want to write a big numbers of
+words inside a small matriz, the algorithm will take some time to find the correct state where the whole 
+words are inside matriz. And you have to be SURE that the words you like to write inside the matriz
 can be writen in  at least one state, this can be solved simple as counting the whole letters of your words 
 an comparing if this number is <= that NxN */
 
