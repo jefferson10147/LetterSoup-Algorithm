@@ -10,9 +10,8 @@ class LetterSoup{
     private char [][] matriz;
     private char [][] matrizAux;  
     private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; //words to write inside the matriz
-    private char [] abc = {'a','b','c','d','e','f','g','h',
-                    'i','j','k','l','m','n','o','p',
-                    'q','r','s','t','u','v','x','w','y','z'};
+    private char [] abc = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
+                            'q','r','s','t','u','v','x','w','y','z'};
     private Random r = new Random();
     private int row,col, size, cont, cont2; 
 
