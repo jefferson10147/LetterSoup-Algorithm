@@ -1,7 +1,7 @@
 /* To be considered: the complexity of this algorithm is based on the numers of words you like
-to write inside the matriz, and how big matriz is, this means if you want to write a big numbers of
-words inside a small matriz, the algorithm will take some time to find the correct state where the whole 
-words are inside matriz. And you have to be SURE that the words you like to write inside the matriz
+to write inside the matrix, and how big matrix is, this means if you want to write a big numbers of
+words inside a small matrix, the algorithm will take some time to find the correct state where the whole 
+words are inside matrix. And you have to be SURE that the words you like to write inside the matrix
 can be writen in  at least one state, this can be solved simple as counting the whole letters of your words 
 an comparing if this number is <= that NxN */
 
@@ -10,13 +10,13 @@ class LetterSoup
 {
     private char [][] matriz;
     private char [][] matrizAux;  
-    private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; //words to write inside the matriz
+    private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; //words to write inside the matrix
     private char [] abc = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
                             'q','r','s','t','u','v','x','w','y','z'};
     private Random r = new Random();
     private int row,col, size, cont, cont2; 
 
-    public LetterSoup (int size)  //creates a matriz of order size*size
+    public LetterSoup (int size)  //creates a matrix of order size*size
     {
         this.size = size;
         this.matriz = new char [this.size][this.size];
@@ -50,7 +50,7 @@ class LetterSoup
         return this.abc[i];
     }
 
-    public void randomABC (char [][] matrizR) //filling in matriz of random letters
+    public void randomABC (char [][] matrizR) //filling in matrix of random letters
     {
         int x;
         for(int i = 0; i<this.size; i++)
@@ -62,7 +62,7 @@ class LetterSoup
                 }
     }
 
-    public int getOnMatrizAux (int r, int c) //filling in with '1' the position on the matriz that the word can't be on it
+    public int getOnMatrizAux (int r, int c) //filling in with '1' the position on the matrix that the word can't be on it
     {                                        //and returning the number of the positions that contains '1'
         int counting1 = 0;
         this.matrizAux [r][c] = '1';
@@ -75,9 +75,9 @@ class LetterSoup
         return counting1;
     }
 
-    public void setPosition ()  //this function selects randomly the form for the word can be write on matriz
-    {                           //if the word selected can't be wrote in any form inside matriz, the main matriz in cleaned
-        int rand, x = 0, i = 0; //and start again until the whole words can be write inside matriz
+    public void setPosition ()  //this function selects randomly the form for the word can be write on matrix
+    {                           //if the word selected can't be wrote in any form inside matrix, the main matrix in cleaned
+        int rand, x = 0, i = 0; //and start again until the whole words can be write inside matrix
         boolean flag = true;
         char [] vAux = new char [8];
         String word;
@@ -93,7 +93,7 @@ class LetterSoup
                     switch(rand)
                     {
                     case 0: flag = horizontal(word); vAux [0] = '1'; break;    //this set of functions writes the words 
-                    case 1: flag = horizontalI(word); vAux [1] = '1'; break;   //inside matriz as they name indicates
+                    case 1: flag = horizontalI(word); vAux [1] = '1'; break;   //inside matrix as they name indicates
                     case 2: flag = vertical(word); vAux [2] = '1'; break;
                     case 3: flag = verticalI(word); vAux [3] = '1'; break;
                     case 4: flag = diagonalL(word); vAux [4] = '1'; break;
@@ -196,7 +196,7 @@ class LetterSoup
             if(this.row + word.length() <= this.size)
             {
                 this.cont = 0; this.cont2 = 0;
-                for (int i = this.row; i < (word.length()+this.row); i++) //;<=;
+                for (int i = this.row; i < (word.length()+this.row); i++)
                 {
                     if (this.matriz[i][this.col] == '0' || this.matriz[i][this.col] == word.charAt(this.cont2))
                         this.cont++;
