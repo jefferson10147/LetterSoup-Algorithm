@@ -1,38 +1,35 @@
-/* To be considered: the complexity of this algorithm is based on the numers of words you like
-to write inside the matrix, and how big matrix is, this means if you want to write a big numbers of
-words inside a small matrix, the algorithm will take some time to find the correct state where the whole 
-words are inside matrix. And you have to be SURE that the words you like to write inside the matrix
-can be writen in  at least one state, this can be solved simple as counting the whole letters of your words 
-an comparing if this number is <= that NxN */
-
 import java.util.Random;
+
+
 class LetterSoup
 {
-    private char [][] matriz;
-    private char [][] matrizAux;  
-    private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; //words to write inside the matrix
-    private char [] abc = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
-                            'q','r','s','t','u','v','x','w','y','z'};
+    private char [][] matrix;
+    private char [][] matrixAux;  
+    private String [] words = { "pez", "oso","ave","boa","lobo","gato"}; 
+    private char [] abc = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','w','y','z'};
     private Random r = new Random();
     private int row,col, size, cont, cont2; 
+
 
     public LetterSoup (int size)  //creates a matrix of order size*size
     {
         this.size = size;
-        this.matriz = new char [this.size][this.size];
-        this.matrizAux = new char [this.size][this.size];
-
-        this.cleanMatriz(this.matriz); 
+        this.matrix = new char [this.size][this.size];
+        this.matrixAux = new char [this.size][this.size];
+        this.cleanMatrix(this.matrix); 
         this.setPosition();
+        this.randomABC(this.matrix);
     }
 
-    public void cleanMatriz (char [][] matrizToClean)  
+
+    public void cleanMatrix (char [][] matrixToClean)  
     {
         for (int i = 0; i < size; i++)
             for (int j = 0; j< size; j++)
-                matrizToClean[i][j] = '0';
+                matrixToClean[i][j] = '0';
             
     }
+
 
     public void cleanVector(char [] vector)
     {
@@ -40,40 +37,45 @@ class LetterSoup
             vector [i] = '0';
     }
 
-    public char [][] getMatriz ()
+
+    public char [][] getMatrix ()
     {
-        return this.matriz;
+        return this.matrix;
     }
+
 
     public char getABC (int i)
     {
         return this.abc[i];
     }
 
-    public void randomABC (char [][] matrizR) //filling in matrix of random letters
+
+    public void randomABC (char [][] matrixR) //filling in matrix of random letters
     {
         int x;
         for(int i = 0; i<this.size; i++)
             for (int j = 0; j<this.size; j++)
-                if(matrizR[i][j] == '0')
+                if(matrixR[i][j] == '0')
                 {
                     x = r.nextInt(26);
-                    matrizR [i][j] = getABC(x); 
+                    matrixR [i][j] = getABC(x); 
                 }
     }
 
-    public int getOnMatrizAux (int r, int c) //filling in with '1' the position on the matrix that the word can't be on it
+
+    public int getOnMatrixAux (int r, int c) //filling in with '1' the position on the matrix that the word can't be on it
     {                                        //and returning the number of the positions that contains '1'
         int counting1 = 0;
-        this.matrizAux [r][c] = '1';
+        this.matrixAux [r][c] = '1';
         
         for (int i = 0; i<this.size; i++)
             for (int j = 0; j<this.size; j++)
-                if (this.matrizAux[i][j] == '1')
+                if (this.matrixAux[i][j] == '1')
                     counting1 ++;
         
         return counting1;
     }
+
 
     public void setPosition ()  //this function selects randomly the form for the word can be write on matrix
     {                           //if the word selected can't be wrote in any form inside matrix, the main matrix in cleaned
@@ -108,7 +110,7 @@ class LetterSoup
 
                 if (x == 8)
                 {
-                    cleanMatriz(this.matriz);
+                    cleanMatrix(this.matrix);
                     i=0;
                     break;
                 }
@@ -117,9 +119,10 @@ class LetterSoup
        } 
     }
 
+
     public boolean horizontal (String word)
     {
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while(condicion != this.size*this.size)
         {
@@ -130,7 +133,7 @@ class LetterSoup
                 this.cont = 0; this.cont2 = 0;
                 for (int i = col; i < (word.length()+col); i++)
                 {
-                    if (this.matriz[this.row][i] == '0' || matriz[this.row][i] == word.charAt(this.cont2))
+                    if (this.matrix[this.row][i] == '0' || matrix[this.row][i] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -140,20 +143,21 @@ class LetterSoup
                     
                     for(int i = 0; i<word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.col++;
                     }
                     return false;    
                 }
             }
-            condicion = getOnMatrizAux(this.row,this.col);
+            condicion = getOnMatrixAux(this.row,this.col);
         }
         return true;
     }
 
+
     public boolean horizontalI(String word)
     {
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while(condicion != this.size*this.size)
         {
@@ -164,7 +168,7 @@ class LetterSoup
                 this.cont = 0; this.cont2 = 0;
                 int x = col;
                 while (x>=((this.col+1)-word.length())){ 
-                    if (this.matriz[this.row][x] == '0' || this.matriz[this.row][x] == word.charAt(this.cont2))
+                    if (this.matrix[this.row][x] == '0' || this.matrix[this.row][x] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -174,20 +178,21 @@ class LetterSoup
                 {
                     for(int i = 0; i<word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.col--;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row, this.col);
+            condicion = getOnMatrixAux(this.row, this.col);
         }
         return true;
     }
 
+
     public boolean vertical (String word)
     {   
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -198,7 +203,7 @@ class LetterSoup
                 this.cont = 0; this.cont2 = 0;
                 for (int i = this.row; i < (word.length()+this.row); i++)
                 {
-                    if (this.matriz[i][this.col] == '0' || this.matriz[i][this.col] == word.charAt(this.cont2))
+                    if (this.matrix[i][this.col] == '0' || this.matrix[i][this.col] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -207,21 +212,22 @@ class LetterSoup
                 {
                     for(int i = 0; i<word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row ++;
                     }
                     return false;
                 }
                 
             }
-            condicion = getOnMatrizAux(this.row,this.col);
+            condicion = getOnMatrixAux(this.row,this.col);
         }
         return true;
     }
 
+
     public boolean verticalI (String word)
     {   
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -232,7 +238,7 @@ class LetterSoup
                 this.cont = 0; this.cont2 = 0;
                 for (int i = this.row; i >= (this.row + 1) - word.length(); i--) 
                 {
-                    if (this.matriz[i][this.col] == '0' || this.matriz[i][this.col] == word.charAt(this.cont2))
+                    if (this.matrix[i][this.col] == '0' || this.matrix[i][this.col] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -241,20 +247,21 @@ class LetterSoup
                 {
                     for(int i = 0; i<word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row --;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row,this.col);
+            condicion = getOnMatrixAux(this.row,this.col);
         }
         return true;
     }
 
+
     public boolean diagonalL(String word)
     {
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -266,7 +273,7 @@ class LetterSoup
                 int x = this.row, j = this.col;
                 while(x >= ((this.row + 1) - word.length()) && j <= (this.col + word.length()))
                 {   
-                    if(this.matriz[x][j] == '0' || this.matriz[x][j] == word.charAt(cont2))
+                    if(this.matrix[x][j] == '0' || this.matrix[x][j] == word.charAt(cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -276,20 +283,21 @@ class LetterSoup
                 {
                     for(int i = 0; i < word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row--; this.col++;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row,this.col);
+            condicion = getOnMatrixAux(this.row,this.col);
         }
         return true;
     }
 
+
     public boolean diagonalLI(String word)
     {
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -301,7 +309,7 @@ class LetterSoup
                 int x = this.row, j = this.col;
                 while(x <= (this.row +  word.length()) && j >= ((this.col+1) - word.length()))
                 {   
-                    if(this.matriz[x][j] == '0' || this.matriz[x][j] == word.charAt(this.cont2))
+                    if(this.matrix[x][j] == '0' || this.matrix[x][j] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -311,20 +319,21 @@ class LetterSoup
                 {
                     for(int i = 0; i < word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row++; this.col--;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row, this.col);
+            condicion = getOnMatrixAux(this.row, this.col);
         }
         return true;
     }
 
+
     public boolean diagonalR(String word)
     {
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -336,7 +345,7 @@ class LetterSoup
                 int x = this.row, j = this.col;
                 while(x >= ((this.row + 1) -  word.length()) && j >= ((this.col + 1) - word.length()))
                 {   
-                    if(this.matriz[x][j] == '0' || this.matriz[x][j] == word.charAt(this.cont2))
+                    if(this.matrix[x][j] == '0' || this.matrix[x][j] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -346,20 +355,21 @@ class LetterSoup
                 {
                     for(int i = 0; i < word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row--; this.col--;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row, this.col);
+            condicion = getOnMatrixAux(this.row, this.col);
         }
         return true;
     }
 
+
     public boolean diagonalRI(String word)
     {  
-        cleanMatriz(this.matrizAux);
+        cleanMatrix(this.matrixAux);
         int condicion = 0;
         while (condicion != this.size*this.size)
         {
@@ -371,7 +381,7 @@ class LetterSoup
                 int x = this.row, j = this.col;
                 while(x < (this.row + word.length()) && j < (this.col + word.length()))
                 {   
-                    if(this.matriz[x][j] == '0' || this.matriz[x][j] == word.charAt(this.cont2))
+                    if(this.matrix[x][j] == '0' || this.matrix[x][j] == word.charAt(this.cont2))
                         this.cont++;
 
                     this.cont2++;
@@ -381,13 +391,13 @@ class LetterSoup
                 {
                     for(int i = 0; i < word.length(); i++)
                     {
-                        this.matriz[this.row][this.col] = word.charAt(i);
+                        this.matrix[this.row][this.col] = word.charAt(i);
                         this.row++; this.col++;
                     }
                     return false;
                 }
             }
-            condicion = getOnMatrizAux(this.row, this.col);
+            condicion = getOnMatrixAux(this.row, this.col);
         }
         return true;
     }
