@@ -1,5 +1,4 @@
 #Letter Soup Java Algorithm 
-
 To be considered: the complexity of this algorithm is based on the numers of words you like to write inside the matrix, 
 and how big matrix is, this means if you want to write a big numbers of words inside a small matrix, 
 the algorithm will take some time to find the correct state where the whole words are inside matrix. 
@@ -9,7 +8,7 @@ this can be solved simple as counting the whole letters of your words and compar
 
 ##How to use this algorithm:
 
-*Make an instance of LetterSoup class, just passing to the constructor the order of the matrix that you like to create, and now you can get the letter soup matrix with just one method, .
+*Make an instance of LetterSoup class, just passing to the constructor the order of the matrix that you like to create, and now you can get the letter soup matrix with just one method, example: .
 
 ```java
 public static void main(String[ ] arg)
