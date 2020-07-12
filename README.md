@@ -1,4 +1,5 @@
-#Letter Soup Java Algorithm 
+#Letter Soup Java Algorithm
+
 To be considered: the complexity of this algorithm is based on the numers of words you like to write inside the matrix, 
 and how big matrix is, this means if you want to write a big numbers of words inside a small matrix, 
 the algorithm will take some time to find the correct state where the whole words are inside matrix. 
